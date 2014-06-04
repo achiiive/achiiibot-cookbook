@@ -15,6 +15,7 @@ include_recipe 'monit'
 install_dir = node.achiiibot.install_dir
 user_name = node.achiiibot.user_name
 group_name = node.achiiibot.group_name
+src_dir = "#{install_dir}/src/achiiibot"
 
 hubot_hipchat_jid = node.achiiibot.hubot_hipchat_jid
 hubot_hipchat_password = node.achiiibot.hubot_hipchat_password
@@ -50,7 +51,7 @@ end
 
 file "#{install_dir}/wrapper_script.sh" do
   content <<-EOC
-  cd #{install_dir}/src/achiiibot
+  cd #{src_dir}
   export HUBOT_HIPCHAT_JID=#{hubot_hipchat_jid}
   export HUBOT_HIPCHAT_PASSWORD=#{hubot_hipchat_password}
   export HUBOT_JENKINS_URL=#{node.achiiibot.jenkins_url}
@@ -82,7 +83,7 @@ execute "start monitoring achiiibot using monit" do
 end
 
 execute "install dependencies for achiiibot" do
-  cwd "#{install_dir}/src/achiiibot"
+  cwd src_dir
   command <<-EOC
   npm install
   npm install --save hubot-hipchat
@@ -115,7 +116,7 @@ directory "#{install_dir}/src" do
   group group_name
 end
 
-git "#{install_dir}/src/achiiibot" do
+git src_dir do
   repository 'git@github.com:achiiive/achiiibot-hipchat.git'
   # checkout_branch 'master'
   user user_name
