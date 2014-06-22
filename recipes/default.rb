@@ -119,4 +119,5 @@ execute "start monitoring achiiibot using monit" do
   monit monitor achiiibot
   monit restart achiiibot
   EOC
+  action :nothing
 end
