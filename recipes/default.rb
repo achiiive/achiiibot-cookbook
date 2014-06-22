@@ -73,25 +73,6 @@ monit_monitrc "achiiibot" do
   )
 end
 
-execute "start monitoring achiiibot using monit" do
-  command <<-EOC
-  monit
-  monit monitor achiiibot
-  monit restart achiiibot
-  EOC
-  action :nothing
-end
-
-execute "install dependencies for achiiibot" do
-  cwd src_dir
-  command <<-EOC
-  npm install
-  npm install --save hubot-hipchat
-  EOC
-  action :nothing
-  notifies :run, "execute[start monitoring achiiibot using monit]"
-end
-
 deploy_key 'github achiiibot repository key' do
   provider Chef::Provider::DeployKeyGithub
   credentials({token: 'ea4a203ecf9336d636a49b0e65ec034a09d2f7a2'})
@@ -122,5 +103,21 @@ git src_dir do
   user user_name
   group group_name
   action :sync
-  notifies :run, "execute[install dependencies for achiiibot]", :immediately
+end
+
+execute "install dependencies for achiiibot" do
+  cwd src_dir
+  command <<-EOC
+  npm install
+  npm install --save hubot-hipchat
+  EOC
+  notifies :run, "execute[start monitoring achiiibot using monit]"
+end
+
+execute "start monitoring achiiibot using monit" do
+  command <<-EOC
+  monit
+  monit monitor achiiibot
+  monit restart achiiibot
+  EOC
 end
