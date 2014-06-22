@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 include_recipe 'git'
-include_recipe 'nodejs::nodejs_from_source'
+include_recipe 'nodejs::nodejs_from_package'
 include_recipe 'node'
 include_recipe 'redis::install'
 include_recipe 'monit'
