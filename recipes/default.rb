@@ -106,6 +106,8 @@ end
 
 execute "install dependencies for achiiibot" do
   cwd src_dir
+  user user_name
+  group group_name
   command <<-EOC
   npm install
   npm install --save hubot-hipchat
