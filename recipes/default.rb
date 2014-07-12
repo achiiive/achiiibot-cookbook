@@ -48,6 +48,8 @@ nodejs_npm 'hubot' do
   version '2.6.4'
 end
 
+nodejs_npm 'hubot-suddendeath'
+
 file "#{install_dir}/wrapper_script.sh" do
   content <<-EOC
   cd #{src_dir}
