@@ -112,7 +112,6 @@ execute "install dependencies for achiiibot" do
   group group_name
   command <<-EOC
   npm install
-  npm install --save hubot-hipchat
   EOC
   notifies :run, "execute[start monitoring achiiibot using monit]"
 end
