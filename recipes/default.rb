@@ -117,6 +117,6 @@ execute "install dependencies for achiiibot" do
 end
 
 service 'achiiibot' do
-  start_command "/bin/sh #{install_dir}/wrapper_script.sh"
+  start_command "/bin/sh #{install_dir}/wrapper_script.sh &"
   action :start
 end
