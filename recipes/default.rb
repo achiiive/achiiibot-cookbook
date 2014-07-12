@@ -113,14 +113,7 @@ execute "install dependencies for achiiibot" do
   command <<-EOC
   npm install
   EOC
-end
-
-execute "start monitoring achiiibot using monit" do
-  command <<-EOC
-  monit
-  monit monitor achiiibot
-  EOC
-  action :nothing
+  notifies :start, "service[achiiibot]"
 end
 
 service 'achiiibot' do
