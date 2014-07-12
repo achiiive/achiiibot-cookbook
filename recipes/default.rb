@@ -123,3 +123,8 @@ execute "start monitoring achiiibot using monit" do
   EOC
   action :nothing
 end
+
+service 'achiiibot' do
+  start_command: "/bin/sh #{install_dir}/wrapper_script.sh"
+  action: :start
+end
