@@ -68,7 +68,7 @@ monit_monitrc "achiiibot" do
   variables(
     {
       matching: "^node\s.+hubot", # Used to find achiiibot process
-      start_script: "/bin/sh #{install_dir}/wrapper_script.sh",
+      start_script: "nohup #{install_dir}/wrapper_script.sh",
       stop_script: "/usr/bin/killall node -s SIGINT"
     }
   )
@@ -117,6 +117,6 @@ execute "install dependencies for achiiibot" do
 end
 
 service 'achiiibot' do
-  start_command "/bin/sh #{install_dir}/wrapper_script.sh &"
+  start_command "nohup #{install_dir}/wrapper_script.sh"
   action :start
 end
