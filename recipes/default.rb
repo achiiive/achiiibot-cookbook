@@ -57,7 +57,7 @@ file "#{install_dir}/wrapper_script.sh" do
   export HUBOT_HIPCHAT_PASSWORD=#{hubot_hipchat_password}
   export HUBOT_JENKINS_URL=#{node.achiiibot.jenkins_url}
   export HUBOT_JENKINS_AUTH=#{node.achiiibot.jenkins_auth}
-  bin/hubot --adapter hipchat --name #{user_name}
+  /usr/bin/nohup bin/hubot --adapter hipchat --name #{user_name} &
   EOC
   user user_name
   group group_name
@@ -68,7 +68,7 @@ monit_monitrc "achiiibot" do
   variables(
     {
       matching: "^node\s.+hubot", # Used to find achiiibot process
-      start_script: "/usr/bin/nohup #{install_dir}/wrapper_script.sh &",
+      start_script: "/bin/sh #{install_dir}/wrapper_script.sh",
       stop_script: "/usr/bin/killall node -s SIGINT"
     }
   )
@@ -117,7 +117,7 @@ execute "install dependencies for achiiibot" do
 end
 
 service 'achiiibot' do
-  start_command "/usr/bin/nohup #{install_dir}/wrapper_script.sh &"
+  start_command "/bin/sh #{install_dir}/wrapper_script.sh"
   action :start
   notifies :run, "execute[monitor achiiibot]"
 end
