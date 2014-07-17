@@ -113,10 +113,19 @@ execute "install dependencies for achiiibot" do
   command <<-EOC
   npm install
   EOC
-  notifies :start, "service[achiiibot]"
+  notifies :start, "service[achiiibot]", :immediately
 end
 
 service 'achiiibot' do
   start_command "nohup #{install_dir}/wrapper_script.sh"
   action [:enable, :start]
+  notifies :run, "execute[monitor achiiibot]"
+end
+
+execute 'monitor achiiibot' do
+  command <<-EOC
+  monit
+  monit monitor achiiibot
+  EOC
+  action :nothing
 end
