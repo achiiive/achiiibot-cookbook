@@ -118,7 +118,7 @@ end
 
 service 'achiiibot' do
   start_command "nohup #{install_dir}/wrapper_script.sh"
-  action [:enable, :start]
+  action :start
   notifies :run, "execute[monitor achiiibot]"
 end
 
