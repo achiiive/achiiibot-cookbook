@@ -118,7 +118,10 @@ template "/etc/init.d/achiiibot" do
   mode 00755
   owner "root"
   group "root"
-  variables({pidfile: node.achiiibot.pidfile})
+  variables(
+    {pidfile: node.achiiibot.pidfile,
+     adapter: adapter}
+  )
 end
 
 execute "install dependencies for achiiibot" do
