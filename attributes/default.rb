@@ -5,6 +5,8 @@ default.achiiibot.install_dir = '/opt/achiiibot'
 default.achiiibot.user_name = 'achiiibot'
 default.achiiibot.group_name = 'achiiibot'
 
+default.achiiibot.adapter = 'hipchat'
+
 default.achiiibot.hubot_hipchat_jid = '43572_859691@chat.hipchat.com'
 default.achiiibot.hubot_hipchat_password = 'Xd4kxy8CWeZA'
 

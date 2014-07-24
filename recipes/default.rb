@@ -16,6 +16,8 @@ user_name = node.achiiibot.user_name
 group_name = node.achiiibot.group_name
 src_dir = "#{install_dir}/src/achiiibot"
 
+adapter = node.achiiibot.adapter
+
 hubot_hipchat_jid = node.achiiibot.hubot_hipchat_jid
 hubot_hipchat_password = node.achiiibot.hubot_hipchat_password
 
@@ -57,7 +59,7 @@ file "#{install_dir}/wrapper_script.sh" do
   export HUBOT_HIPCHAT_PASSWORD=#{hubot_hipchat_password}
   export HUBOT_JENKINS_URL=#{node.achiiibot.jenkins_url}
   export HUBOT_JENKINS_AUTH=#{node.achiiibot.jenkins_auth}
-  bin/hubot --adapter hipchat --name #{user_name}
+  bin/hubot --adapter #{adapter} --name #{user_name}
   EOC
   user user_name
   group group_name
