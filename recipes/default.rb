@@ -123,7 +123,6 @@ execute "install dependencies for achiiibot" do
   command <<-EOC
   npm install
   EOC
-  notifies :start, "service[achiiibot]", :immediately
 end
 
 service 'achiiibot' do
