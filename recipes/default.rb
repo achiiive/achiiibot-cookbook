@@ -18,9 +18,6 @@ src_dir = "#{install_dir}/src/achiiibot"
 
 adapter = node.achiiibot.adapter
 
-hubot_hipchat_jid = node.achiiibot.hubot_hipchat_jid
-hubot_hipchat_password = node.achiiibot.hubot_hipchat_password
-
 user user_name do
   home install_dir
 end
@@ -104,23 +101,20 @@ git src_dir do
   action :sync
 end
 
-bash 'export environment variables' do
-  code <<-EOC
-  export HUBOT_HIPCHAT_JID=#{hubot_hipchat_jid}
-  export HUBOT_HIPCHAT_PASSWORD=#{hubot_hipchat_password}
-  export HUBOT_JENKINS_URL=#{node.achiiibot.jenkins_url}
-  export HUBOT_JENKINS_AUTH=#{node.achiiibot.jenkins_auth}
-  EOC
-end
-
 template "/etc/init.d/achiiibot" do
   source "achiiibot_init.erb"
   mode 00755
   owner "root"
   group "root"
   variables(
-    {pidfile: node.achiiibot.pidfile,
-     adapter: adapter}
+    {
+      pidfile: node.achiiibot.pidfile,
+      adapter: adapter,
+      hubot_hipchat_jid: node.achiiibot.hubot_hipchat_jid,
+      hubot_hipchat_password: node.achiiibot.hubot_hipchat_password,
+      hubot_jenkins_url: node.achiiibot.jenkins_url,
+      hubot_jenkins_auth: node.achiiibot.jenkins_auth
+    }
   )
 end
 

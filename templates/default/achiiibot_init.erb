@@ -25,6 +25,11 @@ ACHIIIBOT_GROUP="achiiibot"
 ADAPTER="<%= @adapter %>"
 ARGS="--name $ACHIIIBOT_NAME --adapter $ADAPTER"
 
+export HUBOT_HIPCHAT_JID="<%= @hubot_hipchat_jid %>"
+export HUBOT_HIPCHAT_PASSWORD="<%= @hubot_hipchat_password %>"
+export HUBOT_JENKINS_URL="<%= @hubot_jenkins_url %>"
+export HUBOT_JENKINS_AUTH="<%= @hubot_jenkins_auth %>"
+
 start() {
   if [[ -f $PIDFILE ]]; then
     echo "PID for $ACHIIIBOT_NAME already exists"
