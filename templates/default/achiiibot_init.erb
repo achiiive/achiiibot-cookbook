@@ -17,10 +17,9 @@
 ### END INIT INFO
 
 ACHIIIBOT_NAME="achiiibot"
-ACHIIIBOT_ADAPTER="hipchat"
 ACHIIIBOT_HOME=/opt/achiiibot
-DAEMON="/opt/achiiibot/src/achiiibot/wrapper_script.sh"
-PIDFILE="/var/run/achiiibot.pid"
+DAEMON="/opt/achiiibot/wrapper_script.sh"
+PIDFILE="#{@pidfile}"
 ACHIIIBOT_USER="achiiibot"
 ACHIIIBOT_GROUP="achiiibot"
 
