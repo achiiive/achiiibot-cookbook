@@ -36,7 +36,7 @@ start() {
     exit 1
   else
     echo "Starting $ACHIIIBOT_NAME as a deamon..."
-    /sbin/start-stop-daemon --start --pidfile $PIDFILE --make-pidfile -c $ACHIIIBOT_USER:$ACHIIIBOT_GROUP --chdir "$ACHIIIBOT_HOME/src/achiiibot" --exec "$DAEMON" -- $ARGS
+    /sbin/start-stop-daemon --start --pidfile $PIDFILE --make-pidfile --background -c $ACHIIIBOT_USER:$ACHIIIBOT_GROUP --chdir "$ACHIIIBOT_HOME/src/achiiibot" --exec "$DAEMON" -- $ARGS
   fi
 }
 
