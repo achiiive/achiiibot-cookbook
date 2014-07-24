@@ -4,7 +4,7 @@ maintainer_email 'masafumi@achiiive.com'
 license          'All rights reserved'
 description      'Installs/Configures achiiibot'
 long_description 'Installs/Configures achiiibot'
-version          '0.1.19'
+version          '0.2.0'
 
 depends 'git'
 depends 'nodejs'
