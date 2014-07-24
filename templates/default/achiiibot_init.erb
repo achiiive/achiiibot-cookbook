@@ -22,6 +22,8 @@ DAEMON="/opt/achiiibot/wrapper_script.sh"
 PIDFILE="<%= @pidfile %>"
 ACHIIIBOT_USER="achiiibot"
 ACHIIIBOT_GROUP="achiiibot"
+ADAPTER="<%= @adapter %>"
+ARGS="--name $ACHIIIBOT_NAME --adapter $ADAPTER"
 
 start() {
   if [[ -f $PIDFILE ]]; then
@@ -29,7 +31,7 @@ start() {
     exit 1
   else
     echo "Starting $ACHIIIBOT_NAME as a deamon..."
-    /sbin/start-stop-daemon --start --pidfile $PIDFILE --make-pidfile -c $ACHIIIBOT_USER:$ACHIIIBOT_GROUP --chdir $ACHIIIBOT_HOME --exec $DAEMON
+    /sbin/start-stop-daemon --start --pidfile $PIDFILE --make-pidfile -c $ACHIIIBOT_USER:$ACHIIIBOT_GROUP --chdir $ACHIIIBOT_HOME --exec "$DAEMON" -- $ARGS
   fi
 }
 
