@@ -57,7 +57,7 @@ file "#{install_dir}/wrapper_script.sh" do
   export HUBOT_HIPCHAT_PASSWORD=#{hubot_hipchat_password}
   export HUBOT_JENKINS_URL=#{node.achiiibot.jenkins_url}
   export HUBOT_JENKINS_AUTH=#{node.achiiibot.jenkins_auth}
-  /usr/bin/nohup bin/hubot --adapter hipchat --name #{user_name} &
+  bin/hubot --adapter hipchat --name #{user_name}
   EOC
   user user_name
   group group_name
