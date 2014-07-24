@@ -55,10 +55,6 @@ nodejs_npm 'hubot-suddendeath'
 file "#{install_dir}/wrapper_script.sh" do
   content <<-EOC
   cd #{src_dir}
-  export HUBOT_HIPCHAT_JID=#{hubot_hipchat_jid}
-  export HUBOT_HIPCHAT_PASSWORD=#{hubot_hipchat_password}
-  export HUBOT_JENKINS_URL=#{node.achiiibot.jenkins_url}
-  export HUBOT_JENKINS_AUTH=#{node.achiiibot.jenkins_auth}
   bin/hubot --adapter #{adapter} --name #{user_name}
   EOC
   user user_name
@@ -106,6 +102,15 @@ git src_dir do
   user user_name
   group group_name
   action :sync
+end
+
+bash 'export environment variables' do
+  code <<-EOC
+  export HUBOT_HIPCHAT_JID=#{hubot_hipchat_jid}
+  export HUBOT_HIPCHAT_PASSWORD=#{hubot_hipchat_password}
+  export HUBOT_JENKINS_URL=#{node.achiiibot.jenkins_url}
+  export HUBOT_JENKINS_AUTH=#{node.achiiibot.jenkins_auth}
+  EOC
 end
 
 template "/etc/init.d/achiiibot" do
