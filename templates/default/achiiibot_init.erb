@@ -31,7 +31,7 @@ export HUBOT_JENKINS_URL="<%= @hubot_jenkins_url %>"
 export HUBOT_JENKINS_AUTH="<%= @hubot_jenkins_auth %>"
 
 start() {
-  if [[ -f $PIDFILE ]]; then
+  if [ -f $PIDFILE ]; then
     echo "PID for $ACHIIIBOT_NAME already exists"
     exit 1
   else
@@ -57,7 +57,7 @@ case "$1" in
     start
     ;;
   status)
-    if [[ -f $PID ]]; then
+    if [ -f $PID ]; then
       echo "PID for $ACHIIIBOT_NAME already exists"
     fi
     ;;
