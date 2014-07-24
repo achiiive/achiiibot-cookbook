@@ -1,0 +1,64 @@
+#! /bin/sh
+#
+# achiiibot
+#
+# chkconfig: 2345 99 01
+# description:
+# Start achiiibot as a daemon
+#
+### BEGIN INIT INFO
+# Providers: achiiibot
+# Required-Start:
+# Required-Stop:
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Start achiiibot as a daemon
+# Description: Start achiiibot as a daemon
+### END INIT INFO
+
+ACHIIIBOT_NAME="achiiibot"
+ACHIIIBOT_ADAPTER="hipchat"
+ACHIIIBOT_HOME=/opt/achiiibot
+DAEMON="/opt/achiiibot/src/achiiibot/wrapper_script.sh"
+PIDFILE="/var/run/achiiibot.pid"
+ACHIIIBOT_USER="achiiibot"
+ACHIIIBOT_GROUP="achiiibot"
+
+start() {
+  if [[ -f $PIDFILE ]]; then
+    echo "PID for $ACHIIIBOT_NAME already exists"
+    exit 1
+  else
+    echo "Starting $ACHIIIBOT_NAME as a deamon..."
+    /sbin/start-stop-daemon --start --pidfile $PIDFILE --make-pidfile -c $ACHIIIBOT_USER:$ACHIIIBOT_GROUP --chdir $ACHIIIBOT_HOME --exec $DAEMON
+  fi
+}
+
+stop(){
+  echo "Stopping $ACHIIIBOT_NAME..."
+  /sbin/start-stop-daemon --stop --pidfile $PIDFILE
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    stop
+    start
+    ;;
+  status)
+    if [[ -f $PID ]]; then
+      echo "PID for $ACHIIIBOT_NAME already exists"
+    fi
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart|status}"
+    exit 1
+    ;;
+esac
+
+exit 0

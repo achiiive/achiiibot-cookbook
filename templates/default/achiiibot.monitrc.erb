@@ -1,4 +1,3 @@
-check process achiiibot
-  matching "<%= @matching %>"
+check process achiiibot with pidfile <%= @pidfile %>
   start program "<%= @start_script %>"
   stop program "<%= @stop_script %>"

@@ -67,7 +67,7 @@ end
 monit_monitrc "achiiibot" do
   variables(
     {
-      matching: "^node\s.+hubot", # Used to find achiiibot process
+      pidfile: node.achiiibot.pidfile,
       start_script: "/bin/sh #{install_dir}/wrapper_script.sh",
       stop_script: "/usr/bin/killall node -s SIGINT"
     }
@@ -106,6 +106,14 @@ git src_dir do
   action :sync
 end
 
+template "/etc/init.d/achiiibot" do
+  source "achiiibot_init.erb"
+  mode 00755
+  owner "root"
+  group "root"
+  variables({pidfile: node.achiiibot.pidfile})
+end
+
 execute "install dependencies for achiiibot" do
   cwd src_dir
   user user_name
@@ -117,8 +125,7 @@ execute "install dependencies for achiiibot" do
 end
 
 service 'achiiibot' do
-  start_command "/bin/sh #{install_dir}/wrapper_script.sh"
-  action :start
+  action [:enable, :start]
   notifies :run, "execute[monitor achiiibot]"
 end
 
