@@ -33,6 +33,7 @@ export HUBOT_JENKINS_AUTH="<%= @hubot_jenkins_auth %>"
 start() {
   if [ -f $PIDFILE ]; then
     echo "PID for $ACHIIIBOT_NAME already exists"
+    echo "PID is `cat $PIDFILE`"
     exit 1
   else
     echo "Starting $ACHIIIBOT_NAME as a deamon..."
@@ -43,6 +44,7 @@ start() {
 stop(){
   echo "Stopping $ACHIIIBOT_NAME..."
   /sbin/start-stop-daemon --stop --pidfile $PIDFILE
+  rm $PIDFILE
 }
 
 case "$1" in
