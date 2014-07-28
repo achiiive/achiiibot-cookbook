@@ -45,7 +45,9 @@ package 'libicu-dev' do
 end
 
 nodejs_npm 'coffee-script'
-nodejs_npm 'xml2js'
+nodejs_npm 'xml2js' do
+  version '0.1.14'
+end
 
 nodejs_npm 'hubot' do
   version '2.6.4'
