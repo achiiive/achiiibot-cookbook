@@ -19,6 +19,7 @@ src_dir = "#{install_dir}/src/achiiibot"
 adapter = node.achiiibot.adapter
 
 init_script = "/etc/init.d/achiiibot"
+pidfile = node.achiiibot.pidfile
 
 user user_name do
   home install_dir
@@ -65,7 +66,7 @@ end
 monit_monitrc "achiiibot" do
   variables(
     {
-      pidfile: node.achiiibot.pidfile,
+      pidfile: pidfile,
       start_script: "#{init_script} start",
       stop_script: "#{init_script} stop",
       restart_script: "#{init_script} restart",
@@ -112,7 +113,7 @@ template init_script do
   group "root"
   variables(
     {
-      pidfile: node.achiiibot.pidfile,
+      pidfile: pidfile,
       adapter: adapter,
       hubot_hipchat_jid: node.achiiibot.hubot_hipchat_jid,
       hubot_hipchat_password: node.achiiibot.hubot_hipchat_password,
@@ -129,7 +130,7 @@ execute "install dependencies for achiiibot" do
   command <<-EOC
   npm install
   EOC
-  if File.exist?(node.achiiibot.pidfile)
+  if File.exist?(pidfile)
     notifies :restart, "service[achiiibot]", :immediately
   else
     notifies :start, "service[achiiibot]", :immediately
