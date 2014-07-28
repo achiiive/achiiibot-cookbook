@@ -129,11 +129,17 @@ execute "install dependencies for achiiibot" do
   command <<-EOC
   npm install
   EOC
-  notifies :restart, "service[achiiibot]" if File.exist?(node.achiiibot.pidfile)
+  if File.exist?(node.achiiibot.pidfile)
+    notifies :restart, "service[achiiibot]", :immediately
+  else
+    notifies :start, "service[achiiibot]", :immediately
+  end
 end
 
 service 'achiiibot' do
-  action [:enable, :start]
+  action :nothing
+  init_command init_script
+  supports :status => true, :restart => true, :reload => false
   notifies :run, "execute[monitor achiiibot]"
 end
 
