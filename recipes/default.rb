@@ -18,6 +18,8 @@ src_dir = "#{install_dir}/src/achiiibot"
 
 adapter = node.achiiibot.adapter
 
+init_script = "/etc/init.d/achiiibot"
+
 user user_name do
   home install_dir
 end
@@ -102,7 +104,6 @@ git src_dir do
   action :sync
 end
 
-init_script = "/etc/init.d/achiiibot"
 template init_script do
   source "achiiibot_init.erb"
   mode 00755
