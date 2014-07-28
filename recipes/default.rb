@@ -127,6 +127,7 @@ execute "install dependencies for achiiibot" do
   command <<-EOC
   npm install
   EOC
+  notifies :restart, "service[achiiibot]" if FIle.exist?(node.achiiibot.pidfile)
 end
 
 service 'achiiibot' do
