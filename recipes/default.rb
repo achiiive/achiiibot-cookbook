@@ -63,8 +63,9 @@ monit_monitrc "achiiibot" do
   variables(
     {
       pidfile: node.achiiibot.pidfile,
-      start_script: "/bin/sh #{install_dir}/wrapper_script.sh",
-      stop_script: "/usr/bin/killall node -s SIGINT"
+      start_script: "#{init_script} start",
+      stop_script: "#{init_script} stop",
+      restart_script: "#{init_script} restart",
     }
   )
 end
@@ -101,7 +102,8 @@ git src_dir do
   action :sync
 end
 
-template "/etc/init.d/achiiibot" do
+init_script = "/etc/init.d/achiiibot"
+template init_script do
   source "achiiibot_init.erb"
   mode 00755
   owner "root"
