@@ -120,7 +120,8 @@ template init_script do
       hubot_hipchat_jid: node.achiiibot.hubot_hipchat_jid,
       hubot_hipchat_password: node.achiiibot.hubot_hipchat_password,
       hubot_jenkins_url: node.achiiibot.jenkins_url,
-      hubot_jenkins_auth: node.achiiibot.jenkins_auth
+      hubot_jenkins_auth: node.achiiibot.jenkins_auth,
+      hubot_newrelic_api_key: node.achiiibot.hubot_newrelic_api_key
     }
   )
 end
