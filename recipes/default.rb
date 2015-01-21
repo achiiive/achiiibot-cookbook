@@ -131,7 +131,7 @@ execute "install dependencies for achiiibot" do
   user user_name
   group group_name
   command <<-EOC
-  npm install
+  sudo npm install
   EOC
   if File.exist?(pidfile)
     notifies :restart, "service[achiiibot]", :immediately
