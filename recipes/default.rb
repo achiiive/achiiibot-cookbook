@@ -10,6 +10,7 @@ include_recipe 'git'
 include_recipe 'nodejs::nodejs_from_package'
 include_recipe 'redis::install'
 include_recipe 'monit'
+include_recipe 'sudo'
 
 install_dir = node.achiiibot.install_dir
 user_name = node.achiiibot.user_name
